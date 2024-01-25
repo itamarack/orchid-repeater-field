@@ -47,7 +47,7 @@
       }
       > .card-header {
         padding: 0.50rem 1rem;
-
+        background-color: rgba(21,20,26,.03)!important;
         .actions {
           span {
             &.action {
@@ -69,6 +69,7 @@
 
       > .card-body {
         padding: 0.75rem;
+        background-color: #fff!important;
       }
 
       &.sortable-ghost {
