@@ -76,7 +76,6 @@ class RepeaterController extends Controller
         $propQuery->setValue($this->layout, $queryData);
 
         $fields = $method->invoke($this->layout);
-
         $form = new Builder($this->prepareFields($fields), $query);
 
         if ($this->repeaterName) {
@@ -99,7 +98,6 @@ class RepeaterController extends Controller
                 $result[] = $field->setGroup($this->prepareFields($field->getGroup()));
             } elseif ($field instanceof Field) {
                 $name = $field->get('name');
-
                 $field->addBeforeRender(function () use ($name, $field) {
                     $propInlineAttributes = new ReflectionProperty($field, 'inlineAttributes');
                     $propInlineAttributes->setAccessible(true);
@@ -108,11 +106,9 @@ class RepeaterController extends Controller
                     $propInlineAttributes->setValue($field, $inlineAttributes);
                     $field->set('data-repeater-name-key', $name);
                 });
-
                 $result[] = $field;
             }
         }
-
         return $result;
     }
 
