@@ -250,15 +250,16 @@ export default class extends ApplicationController {
         this.sort().checkEmpty();
         setTimeout(() => {
             this.initTiny();
-        }, 100);
+            this.sort().checkEmpty();
+        }, 200);
     }
 
     /**
      * Sorting nested fields
      */
     sort() {
+        console.log('sort');
         const self = this;
-
         const blocks = this.blocksTarget.querySelectorAll(
             ':scope > .repeater-item',
         );
@@ -317,6 +318,7 @@ export default class extends ApplicationController {
     }
 
     initTiny() {
+        console.log('tiny');
         const elementsWithIdContainingText = document.querySelectorAll('.tinymce');
         elementsWithIdContainingText.forEach((element) => {
             const selector = "#" + element.id;
@@ -353,7 +355,7 @@ export default class extends ApplicationController {
 
         xhr.onload = () => {
             if (xhr.status === 403) {
-                reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
+                reject({message: 'HTTP Error: ' + xhr.status, remove: true});
                 return;
             }
 
