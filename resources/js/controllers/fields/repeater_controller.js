@@ -23,6 +23,8 @@ export default class extends ApplicationController {
 
     sortableInstance = null;
 
+    inputs = null;
+
     connect() {
         if (document.documentElement.hasAttribute('data-turbolinks-preview')
             || document.body.classList.contains('gu-unselectable')) {
@@ -140,7 +142,7 @@ export default class extends ApplicationController {
             animation: 150,
             onEnd: () => {
                 this.sort();
-                this.initTiny()
+                this.initTiny();
             },
         });
 
@@ -160,9 +162,9 @@ export default class extends ApplicationController {
     collapse(event) {
         const currentBlock = event.currentTarget.closest('.collapse-switch');
 
-        currentBlock.querySelector('.transition').classList.toggle("collapse-action");
+        currentBlock.querySelector('.transition').classList.toggle('collapse-action');
 
-        currentBlock.parentElement.parentElement.parentElement.querySelector('.card-body').classList.toggle("collapse");
+        currentBlock.parentElement.parentElement.parentElement.querySelector('.card-body').classList.toggle('collapse');
     }
 
     addNewBlock() {
@@ -187,6 +189,7 @@ export default class extends ApplicationController {
         const blocksCount = this.blocksTarget.querySelectorAll(
             ':scope > .repeater-item',
         ).length;
+        // eslint-disable-next-line no-restricted-globals
         const num = event.detail.blocksNum || 1;
         const repeaterData = this.getRepeaterData();
 
@@ -258,20 +261,18 @@ export default class extends ApplicationController {
      * Sorting nested fields
      */
     sort() {
-        console.log('sort');
         const self = this;
-        const blocks = this.blocksTarget.querySelectorAll(
-            ':scope > .repeater-item',
-        );
+        const blocks = this.blocksTarget.querySelectorAll(':scope > .repeater-item');
+
         blocks.forEach((block, currentKey) => {
             block.dataset.sort = currentKey;
             const fields = block.querySelectorAll('[data-repeater-name-key]');
-            if (!fields.length && !inputs.length) {
+            if (!fields.length && !this.inputs.length) {
                 return;
             }
 
             fields.forEach((field) => {
-                const {repeaterNameKey} = field.dataset;
+                const { repeaterNameKey } = field.dataset;
                 let originalName = `[${repeaterNameKey.replace('.', '')}]`;
 
                 if (repeaterNameKey.endsWith('.')) {
@@ -282,21 +283,25 @@ export default class extends ApplicationController {
                 const inputs = field.querySelectorAll('input[type="hidden"]');
                 if (inputs.length) {
                     inputs.forEach((input) => {
+                        let currentName = input.name;
+
+                        // Убираем старый индекс
+                        const nameWithoutIndex = currentName.replace(/\[\d+\]/, '');
+
+                        // Формируем новый индекс и имя
+                        const newIndex = block.dataset.sort;
+                        let resultInputName = `${input.closest('.repeaters_container').dataset.containerKey}[${newIndex}]${nameWithoutIndex}`;
+
+                        // Добавляем множественность если требуется
                         if (field.getAttribute('multiple')) {
-                            originalName += '[]';
+                            resultInputName += '[]';
                         }
-                        const resultInputName = `${input.closest(
-                            '.repeaters_container',
-                        ).dataset.containerKey}[${
-                            input.closest('.repeater-item').dataset.sort}]${originalName}`;
+
                         input.setAttribute('name', resultInputName);
                     });
                 }
 
-                const resultName = `${field.closest(
-                    '.repeaters_container',
-                ).dataset.containerKey}[${
-                    field.closest('.repeater-item').dataset.sort}]${originalName}`;
+                const resultName = `${field.closest('.repeaters_container').dataset.containerKey}[${field.closest('.repeater-item').dataset.sort}]${originalName}`;
 
                 field.setAttribute('name', resultName);
             });
@@ -311,6 +316,7 @@ export default class extends ApplicationController {
         return this;
     }
 
+
     getRepeaterData() {
         return this.data.get('ajax-data')
             ? JSON.parse(this.data.get('ajax-data'))
@@ -321,17 +327,15 @@ export default class extends ApplicationController {
         console.log('tiny');
         const elementsWithIdContainingText = document.querySelectorAll('.tinymce');
         elementsWithIdContainingText.forEach((element) => {
-            const selector = "#" + element.id;
+            const selector = `#${element.id}`;
             tinymce.init({
                 selector: selector,
                 language: 'ru',
                 plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
                 toolbar: 'undo redo bold italic underline strikethrough fontfamily fontsize blocks alignleft aligncenter alignright alignjustify outdent indent  numlist bullist forecolor backcolor removeformat pagebreak charmap emoticons fullscreen code preview print insertfile image media link anchor codesample ltr rtl',
                 menubar: false,
-                //content_css: '/app/css/content-style.css',
-                //importcss_append: true,
                 table_header_type: 'section',
-                images_upload_handler: this.example_image_upload_handler
+                images_upload_handler: this.example_image_upload_handler,
             });
         });
     }
