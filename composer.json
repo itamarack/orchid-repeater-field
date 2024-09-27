@@ -2,6 +2,7 @@
   "name": "nakukryskin/orchid-repeater-field",
   "description": "Adding support of repeater field to the Orchid RAD platform.",
   "license": "wtfpl",
+  "version": "dev-rocont",
   "authors": [
     {
       "name": "Vladislav Zhdanov",
