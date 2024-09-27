@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+  nginx:
+    image: nginx:alpine
+    container_name: repeater_nginx
+    volumes:
+      - .:/var/www/repeater/site
+      - ./docker/nginx/nginx.conf.template:/etc/nginx/templates/default.conf.template
+      - ./docker/nginx/log:/var/log/nginx
+    environment:
+        - DOCKER_NAME=repeater
+    networks:
+      - common
+    ports:
+      - "1001:80"
+
+  php-fpm:
+    build: ./docker/php-fpm
+    image: repeater_php-fpm
+    container_name: repeater_php-fpm
+    restart: unless-stopped
+    working_dir: /var/www/repeater/site
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./docker/php-fpm/php.ini:/etc/php/8.3/fpm/conf.d/99-overrides.ini
+      - ./docker/php-fpm/php-fpm.conf:/etc/php/8.3/fpm/pool.d/z-overrides.conf
+      - ./docker/php-fpm/log:/var/log/php-fpm
+      - .:/var/www/repeater/site
+    ports:
+      - "51001:51001"
+    networks:
+      - common
+
+networks:
+  common:
+    external: true

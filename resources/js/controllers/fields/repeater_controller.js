@@ -261,18 +261,20 @@ export default class extends ApplicationController {
      * Sorting nested fields
      */
     sort() {
+        console.log('sort');
         const self = this;
-        const blocks = this.blocksTarget.querySelectorAll(':scope > .repeater-item');
-
+        const blocks = this.blocksTarget.querySelectorAll(
+            ':scope > .repeater-item',
+        );
         blocks.forEach((block, currentKey) => {
             block.dataset.sort = currentKey;
             const fields = block.querySelectorAll('[data-repeater-name-key]');
-            if (!fields.length && !this.inputs.length) {
+            if (!fields.length && !inputs.length) {
                 return;
             }
 
             fields.forEach((field) => {
-                const { repeaterNameKey } = field.dataset;
+                const {repeaterNameKey} = field.dataset;
                 let originalName = `[${repeaterNameKey.replace('.', '')}]`;
 
                 if (repeaterNameKey.endsWith('.')) {
@@ -283,25 +285,21 @@ export default class extends ApplicationController {
                 const inputs = field.querySelectorAll('input[type="hidden"]');
                 if (inputs.length) {
                     inputs.forEach((input) => {
-                        let currentName = input.name;
-
-                        // Убираем старый индекс
-                        const nameWithoutIndex = currentName.replace(/\[\d+\]/, '');
-
-                        // Формируем новый индекс и имя
-                        const newIndex = block.dataset.sort;
-                        let resultInputName = `${input.closest('.repeaters_container').dataset.containerKey}[${newIndex}]${nameWithoutIndex}`;
-
-                        // Добавляем множественность если требуется
                         if (field.getAttribute('multiple')) {
-                            resultInputName += '[]';
+                            originalName += '[]';
                         }
-
+                        const resultInputName = `${input.closest(
+                            '.repeaters_container',
+                        ).dataset.containerKey}[${
+                            input.closest('.repeater-item').dataset.sort}]${originalName}`;
                         input.setAttribute('name', resultInputName);
                     });
                 }
 
-                const resultName = `${field.closest('.repeaters_container').dataset.containerKey}[${field.closest('.repeater-item').dataset.sort}]${originalName}`;
+                const resultName = `${field.closest(
+                    '.repeaters_container',
+                ).dataset.containerKey}[${
+                    field.closest('.repeater-item').dataset.sort}]${originalName}`;
 
                 field.setAttribute('name', resultName);
             });
@@ -315,7 +313,6 @@ export default class extends ApplicationController {
 
         return this;
     }
-
 
     getRepeaterData() {
         return this.data.get('ajax-data')
