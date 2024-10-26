@@ -1,15 +1,20 @@
 {
-  "name": "nakukryskin/orchid-repeater-field",
-  "description": "Adding support of repeater field to the Orchid RAD platform.",
+  "name": "rocont/orchid-repeater-field",
+  "description": "Adding support of repeater field to the Orchid RAD platform. Forked from Nks/orchid-repeater-field",
   "license": "wtfpl",
   "authors": [
     {
       "name": "Vladislav Zhdanov",
       "email": "v.jdanov@gmail.com",
       "role": "Developer"
+    },
+    {
+      "name": "Mikhail Margasov",
+      "email": "m.margasov@rocont.ru",
+      "role": "Developer"
     }
   ],
-  "homepage": "https://github.com/nakukryskin/orchid-repeater-field",
+  "homepage": "https://github.com/Rocont/orchid-repeater-field",
   "keywords": [
     "Laravel",
     "Orchid Repeater Field",
@@ -27,18 +32,18 @@
   },
   "autoload": {
     "psr-4": {
-      "Nakukryskin\\OrchidRepeaterField\\": "src/"
+      "Rocont\\OrchidRepeaterField\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Nakukryskin\\OrchidRepeaterField\\Tests\\": "tests"
+      "Rocont\\OrchidRepeaterField\\Tests\\": "tests"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Nakukryskin\\OrchidRepeaterField\\Providers\\ServiceProvider"
+        "Rocont\\OrchidRepeaterField\\Providers\\ServiceProvider"
       ]
     }
   },

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nakukryskin\OrchidRepeaterField\Fields;
+namespace Rocont\OrchidRepeaterField\Fields;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;

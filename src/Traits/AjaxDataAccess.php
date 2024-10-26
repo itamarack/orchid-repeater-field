@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nakukryskin\OrchidRepeaterField\Traits;
+namespace Rocont\OrchidRepeaterField\Traits;
 
 use Illuminate\Support\Collection;
 

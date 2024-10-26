@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nakukryskin\OrchidRepeaterField\Http\Requests;
+namespace Rocont\OrchidRepeaterField\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
