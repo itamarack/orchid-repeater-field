@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nakukryskin\OrchidRepeaterField\Providers;
+namespace Rocont\OrchidRepeaterField\Providers;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Orchid\Platform\Dashboard;
@@ -69,13 +69,13 @@ class ServiceProvider extends BaseServiceProvider
     private function registerResources(): self
     {
         $this->publishes([
-            ORCHID_REPEATER_FIELD_PACKAGE_PATH.'/public' => public_path('vendor/nakukryskin/orchid-repeater-field'),
+            ORCHID_REPEATER_FIELD_PACKAGE_PATH.'/public' => public_path('vendor/Rocont/orchid-repeater-field'),
         ], ['repeater-field.assets', 'laravel-assets']);
 
         View::composer('platform::app', function () {
             $this->dashboard
-                ->registerResource('scripts', mix('/js/repeater.js', 'vendor/nakukryskin/orchid-repeater-field'))
-                ->registerResource('stylesheets', mix('/css/repeater.css', 'vendor/nakukryskin/orchid-repeater-field'));
+                ->registerResource('scripts', mix('/js/repeater.js', 'vendor/Rocont/orchid-repeater-field'))
+                ->registerResource('stylesheets', mix('/css/repeater.css', 'vendor/Rocont/orchid-repeater-field'));
         });
 
         return $this;
