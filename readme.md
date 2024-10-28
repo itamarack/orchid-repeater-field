@@ -1,7 +1,5 @@
 # Orchid Platform Repeater Field
 
-[![Support Ukraine Badge](https://bit.ly/support-ukraine-now)](https://supportukrainenow.org)
-
 ![Orchid Platform Repeater Field](screenshots/repeater.jpg?raw=true)
 
 ## Brief
