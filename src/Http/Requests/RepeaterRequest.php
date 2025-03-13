@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rocont\OrchidRepeaterField\Http\Requests;
+namespace Diggitto\OrchidRepeaterField\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -16,11 +16,11 @@ class RepeaterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'blocks'        => ['nullable', 'integer'],
-            'num'           => ['nullable', 'integer'],
-            'layout'        => ['required', 'string'],
+            'blocks' => ['nullable', 'integer'],
+            'num' => ['nullable', 'integer'],
+            'layout' => ['required', 'string'],
             'repeater_name' => ['required', 'string'],
-            'values'        => ['nullable', 'array'],
+            'values' => ['nullable', 'array'],
             'repeater_data' => ['nullable', 'array'],
         ];
     }

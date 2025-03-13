@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rocont\OrchidRepeaterField\Providers;
+namespace Diggitto\OrchidRepeaterField\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +34,6 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix(Dashboard::prefix('/systems'))
             ->as('platform.')
             ->middleware(config('platform.middleware.private'))
-            ->group(realpath(ORCHID_REPEATER_FIELD_PACKAGE_PATH.'/routes/systems.php'));
+            ->group(realpath(ORCHID_REPEATER_FIELD_PACKAGE_PATH . '/routes/systems.php'));
     }
 }

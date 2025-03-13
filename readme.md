@@ -28,7 +28,7 @@ For 4.7.1 version use [0.0.8 tag](https://github.com/Nks/orchid-repeater-field/t
 ## How to use
 
 1. Install package with composer:
-   `composer require Rocont/orchid-repeater-field`
+   `composer require Diggitto/orchid-repeater-field`
 
    Latest version of laravel automatically discover package to use.
 
@@ -128,7 +128,7 @@ To use ajaxData, first connect trait `AjaxDataAccess` to your Layout:
 
 namespace App\Orchid\Layouts;
 
-use Rocont\OrchidRepeaterField\Traits\AjaxDataAccess;
+use Diggitto\OrchidRepeaterField\Traits\AjaxDataAccess;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;

@@ -1,12 +1,12 @@
 {
-  "name": "rocont/orchid-repeater-field",
+  "name": "diggitto/orchid-repeater-field",
   "description": "Adding support of repeater field to the Orchid RAD platform. Forked from Nks/orchid-repeater-field",
   "license": "wtfpl",
   "version": "v13.0.10",
   "authors": [
     {
       "name": "Mikhail Margasov",
-      "email": "m.margasov@rocont.ru",
+      "email": "m.margasov@diggitto.ru",
       "role": "Developer"
     },
     {
@@ -15,14 +15,14 @@
       "role": "Developer"
     }
   ],
-  "homepage": "https://github.com/Rocont/orchid-repeater-field",
+  "homepage": "https://github.com/Diggitto/orchid-repeater-field",
   "keywords": [
     "Laravel",
     "Orchid Repeater Field",
     "Repeater Field"
   ],
   "require": {
-    "laravel/framework": "^v11",
+    "laravel/framework": "^v12",
     "orchid/platform": "^14"
   },
   "require-dev": {
@@ -33,18 +33,18 @@
   },
   "autoload": {
     "psr-4": {
-      "Rocont\\OrchidRepeaterField\\": "src/"
+      "Diggitto\\OrchidRepeaterField\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Rocont\\OrchidRepeaterField\\Tests\\": "tests"
+      "Diggitto\\OrchidRepeaterField\\Tests\\": "tests"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Rocont\\OrchidRepeaterField\\Providers\\ServiceProvider"
+        "Diggitto\\OrchidRepeaterField\\Providers\\ServiceProvider"
       ]
     }
   },

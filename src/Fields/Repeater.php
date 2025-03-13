@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rocont\OrchidRepeaterField\Fields;
+namespace Diggitto\OrchidRepeaterField\Fields;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
@@ -28,11 +28,11 @@ class Repeater extends Field
     ];
 
     protected $attributes = [
-        'class'                  => 'form-control',
-        'original_name'          => null,
-        'template'               => null,
-        'button_label'           => null,
-        'ajax_data'              => null,
+        'class' => 'form-control',
+        'original_name' => null,
+        'template' => null,
+        'button_label' => null,
+        'ajax_data' => null,
         'confirmDeleteBlockText' => null,
     ];
 
@@ -46,11 +46,12 @@ class Repeater extends Field
 
     public function layout(string $layout): self
     {
-        if (! class_exists($layout) && ! (app($layout) instanceof Rows)) {
+        if (!class_exists($layout) && !(app($layout) instanceof Rows)) {
             throw new \InvalidArgumentException(
                 __('":class" does not exists or not supported. Only rows supported by repeater.', [
                     'class' => $layout,
-                ]));
+                ])
+            );
         }
 
         $this->set('layout', Crypt::encryptString($layout));
@@ -58,7 +59,7 @@ class Repeater extends Field
         $this->addBeforeRender(function () {
             $value = $this->get('value') ?? old($this->getOldName());
 
-            if (! is_iterable($value)) {
+            if (!is_iterable($value)) {
                 $value = Arr::wrap($value);
             }
 
@@ -68,12 +69,12 @@ class Repeater extends Field
         return $this;
     }
 
-    public static function make(string $name = null): self
+    public static function make(string $name = null): static
     {
         return (new static)->name($name)
             ->set('original_name', $name)
             ->value([])
-            ->set('template', 'repeater_'.Str::random(32));
+            ->set('template', 'repeater_' . Str::random(32));
     }
 
     public function view(string $view): self

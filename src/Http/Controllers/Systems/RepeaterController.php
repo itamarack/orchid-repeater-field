@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Rocont\OrchidRepeaterField\Http\Controllers\Systems;
+namespace Diggitto\OrchidRepeaterField\Http\Controllers\Systems;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Crypt;
-use Rocont\OrchidRepeaterField\Exceptions\UnsupportedAjaxDataLayout;
-use Rocont\OrchidRepeaterField\Exceptions\WrongLayoutPassed;
-use Rocont\OrchidRepeaterField\Http\Requests\RepeaterRequest;
-use Rocont\OrchidRepeaterField\Traits\AjaxDataAccess;
+use Diggitto\OrchidRepeaterField\Exceptions\UnsupportedAjaxDataLayout;
+use Diggitto\OrchidRepeaterField\Exceptions\WrongLayoutPassed;
+use Diggitto\OrchidRepeaterField\Http\Requests\RepeaterRequest;
+use Diggitto\OrchidRepeaterField\Traits\AjaxDataAccess;
 use Orchid\Platform\Http\Controllers\Controller;
 use Orchid\Screen\Builder;
 use Orchid\Screen\Field;
@@ -49,7 +49,7 @@ class RepeaterController extends Controller
     {
         $result = [
             'template' => view('platform::partials.fields._repeater_field_template')->render(),
-            'fields'   => [],
+            'fields' => [],
         ];
 
         if ($this->values) {
@@ -121,14 +121,14 @@ class RepeaterController extends Controller
 
     private function getFormPrefix(int $index = 0): string
     {
-        return $this->repeaterName.'['.($this->blocksCount + $index).']';
+        return $this->repeaterName . '[' . ($this->blocksCount + $index) . ']';
     }
 
     public function view(RepeaterRequest $request): array
     {
         $layout = Crypt::decryptString($request->get('layout')) ?? null;
 
-        throw_if(! class_exists($layout), new WrongLayoutPassed($layout));
+        throw_if(!class_exists($layout), new WrongLayoutPassed($layout));
 
         $this->layout = app($layout);
 
@@ -137,7 +137,7 @@ class RepeaterController extends Controller
         $this->num = $request->get('num', 0);
         $this->repeaterData = $request->get('repeater_data', []);
 
-        if (! is_null($this->repeaterData) && ! in_array(AjaxDataAccess::class, class_uses($this->layout), true)) {
+        if (!is_null($this->repeaterData) && !in_array(AjaxDataAccess::class, class_uses($this->layout), true)) {
             throw new UnsupportedAjaxDataLayout(get_class($this->layout));
         }
 

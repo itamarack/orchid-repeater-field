@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rocont\OrchidRepeaterField\Traits;
+namespace Diggitto\OrchidRepeaterField\Traits;
 
 use Illuminate\Support\Collection;
 

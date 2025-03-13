@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rocont\OrchidRepeaterField\Exceptions;
+namespace Diggitto\OrchidRepeaterField\Exceptions;
 
 use JetBrains\PhpStorm\Pure;
 use Throwable;

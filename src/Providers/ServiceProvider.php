@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rocont\OrchidRepeaterField\Providers;
+namespace Diggitto\OrchidRepeaterField\Providers;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Orchid\Platform\Dashboard;
@@ -19,7 +19,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->dashboard = $dashboard;
 
-        $this->loadViewsFrom(ORCHID_REPEATER_FIELD_PACKAGE_PATH.'/resources/views', 'platform');
+        $this->loadViewsFrom(ORCHID_REPEATER_FIELD_PACKAGE_PATH . '/resources/views', 'platform');
 
         $this->registerResources()
             ->registerProviders()
@@ -33,8 +33,8 @@ class ServiceProvider extends BaseServiceProvider
 
     public function register()
     {
-        if (! defined('ORCHID_REPEATER_FIELD_PACKAGE_PATH')) {
-            define('ORCHID_REPEATER_FIELD_PACKAGE_PATH', realpath(__DIR__.'/../../'));
+        if (!defined('ORCHID_REPEATER_FIELD_PACKAGE_PATH')) {
+            define('ORCHID_REPEATER_FIELD_PACKAGE_PATH', realpath(__DIR__ . '/../../'));
         }
     }
 
@@ -62,20 +62,20 @@ class ServiceProvider extends BaseServiceProvider
     protected function bootForConsole()
     {
         $this->publishes([
-            ORCHID_REPEATER_FIELD_PACKAGE_PATH.'/resources/views' => base_path('resources/views/vendor/platform'),
+            ORCHID_REPEATER_FIELD_PACKAGE_PATH . '/resources/views' => base_path('resources/views/vendor/platform'),
         ], 'repeater-field.views');
     }
 
     private function registerResources(): self
     {
         $this->publishes([
-            ORCHID_REPEATER_FIELD_PACKAGE_PATH.'/public' => public_path('vendor/Rocont/orchid-repeater-field'),
+            ORCHID_REPEATER_FIELD_PACKAGE_PATH . '/public' => public_path('vendor/Diggitto/orchid-repeater-field'),
         ], ['repeater-field.assets', 'laravel-assets']);
 
         View::composer('platform::app', function () {
             $this->dashboard
-                ->registerResource('scripts', mix('/js/repeater.js', 'vendor/Rocont/orchid-repeater-field'))
-                ->registerResource('stylesheets', mix('/css/repeater.css', 'vendor/Rocont/orchid-repeater-field'));
+                ->registerResource('scripts', mix('/js/repeater.js', 'vendor/Diggitto/orchid-repeater-field'))
+                ->registerResource('stylesheets', mix('/css/repeater.css', 'vendor/Diggitto/orchid-repeater-field'));
         });
 
         return $this;
@@ -83,6 +83,6 @@ class ServiceProvider extends BaseServiceProvider
 
     private function registerTranslations(): void
     {
-        $this->loadJsonTranslationsFrom(realpath(ORCHID_REPEATER_FIELD_PACKAGE_PATH.'/resources/lang/'));
+        $this->loadJsonTranslationsFrom(realpath(ORCHID_REPEATER_FIELD_PACKAGE_PATH . '/resources/lang/'));
     }
 }
